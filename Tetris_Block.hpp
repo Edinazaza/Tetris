@@ -1,22 +1,23 @@
 #pragma once
+#include <array>
+#include <utility>
 
-using CoordTetramino = std::array<short int, 4>;
+using Tetramino = std::array<short int, 4>;
+using CoordinateBlock = std::array<std::pair<short int, short int>, 4>;
 
-class Tetramino
+Tetramino RandTetramino();
+
+class Block
 {
 public:
-	Tetramino() = default;
-	~Tetramino() = default;
-	CoordTetramino Create() const;
+	Block(const Tetramino& coord);
+	~Block() = default;
+	void Restart(const Tetramino& coordinate);
+	void MoveDown();
+	void MoveLeft();
+	void MoveRight();
+	void Rotate();
+	const CoordinateBlock& GetCoordinate() const;
 private:
-	const std::array<CoordTetramino, 7> coordinate =
-	{ {
-		{1, 3, 5, 7},
-		{2, 3, 4, 5},
-		{2, 3, 5, 7},
-		{2, 4, 5, 7},
-		{3, 5, 4, 6},
-		{3, 5, 4, 7},
-		{3, 5, 7, 6}
-	} };
+	CoordinateBlock coordinate;
 };
