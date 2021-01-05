@@ -34,7 +34,7 @@ int main()
 					field.BlockMoveRight();
 				}
 				else if (event.key.code == sf::Keyboard::Up) {
-					block.Rotate();
+					field.BlockRotate();
 				}
 				else if (event.key.code == sf::Keyboard::Down) {
 					field.BlockMoveDown();

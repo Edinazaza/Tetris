@@ -54,6 +54,15 @@ void Field::BlockMoveRight()
 	}
 }
 
+void Field::BlockRotate()
+{
+	Block preBlock = block;
+	block.Rotate();
+	if (CheckerBlock(block)) {
+		block = preBlock;
+	}
+}
+
 void Field::Commit()
 {
 	field = GetField();

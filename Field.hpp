@@ -13,14 +13,14 @@ public:
 	void BlockMoveDown();
 	void BlockMoveLeft();
 	void BlockMoveRight();
-	//void BlockRotate();
+	void BlockRotate();
 
-	void Commit();
 	const GameField GetField();
 
 private:
 	Block block;
 	GameField field;
 
+	void Commit();
 	bool CheckerBlock(const Block& block) const;
 };
