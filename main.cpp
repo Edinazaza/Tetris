@@ -20,7 +20,15 @@ int main()
 	Block block(RandTetramino());
 	Field field(block);
 
+	double timer = 0.0, delay = 0.35;
+	sf::Clock clock;
+
 	while (window.isOpen()) {
+		delay = 0.35;
+		double time = clock.getElapsedTime().asSeconds();
+		clock.restart();
+		timer += time;
+
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -37,12 +45,18 @@ int main()
 					field.BlockRotate();
 				}
 				else if (event.key.code == sf::Keyboard::Down) {
-					field.BlockMoveDown();
+					delay = 0.05;
 				}
 			}
 		}
 		window.clear(sf::Color::White);
-				
+		
+		if (timer > delay)
+		{
+			field.BlockMoveDown();
+			timer = 0;
+		}
+
 		for (size_t i = 0; i < field.GetField().size(); ++i) {
 			for (size_t j = 0; j < field.GetField()[i].size(); ++j) {
 				if (field.GetField()[i][j]) {
@@ -53,7 +67,6 @@ int main()
 		}
 
 		window.display();
-		sf::sleep(sf::milliseconds(170));
 	}
 	return 0;
 }
