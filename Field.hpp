@@ -21,4 +21,6 @@ public:
 private:
 	Block block;
 	GameField field;
+
+	bool CheckerBlock(const Block& block) const;
 };

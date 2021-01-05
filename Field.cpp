@@ -1,4 +1,6 @@
+#include <stdexcept>
 #include "Field.hpp"
+
 
 Field::Field(const Block& block) : block(block)
 {
@@ -20,7 +22,7 @@ void Field::BlockMoveDown()
 	block.MoveDown();
 	
 	for (const auto& i : block.GetCoordinate()) {
-		if (i.second >= field[0].size()) {
+		if (i.second >= field[0].size() || CheckerBlock(block)) {
 			block = preBlock;
 			Commit();
 			NewBlock(RandTetramino());
@@ -34,7 +36,7 @@ void Field::BlockMoveLeft()
 	block.MoveLeft();
 
 	for (const auto& i : block.GetCoordinate()) {
-		if (i.first < 0) {
+		if (i.first < 0 || CheckerBlock(block)) {
 			block = preBlock;
 		}
 	}
@@ -46,7 +48,7 @@ void Field::BlockMoveRight()
 	block.MoveRight();
 
 	for (const auto& i : block.GetCoordinate()) {
-		if (i.first >= field.size()) {
+		if (i.first >= field.size() || CheckerBlock(block)) {
 			block = preBlock;
 		}
 	}
@@ -65,4 +67,21 @@ const GameField Field::GetField()
 	}
 
 	return finalField;
+}
+
+bool Field::CheckerBlock(const Block& block) const
+{
+	try
+	{
+		for (const auto& coord : block.GetCoordinate()) {
+			if (field.at(coord.first).at(coord.second)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		return true;
+	}
 }
