@@ -9,6 +9,11 @@ Field::Field(const Block& block) : block(block)
 	}
 }
 
+void Field::NewBlock(const Block& block)
+{
+	this->block = block;
+}
+
 void Field::BlockMoveDown()
 {
 	Block preBlock = block;
@@ -17,6 +22,8 @@ void Field::BlockMoveDown()
 	for (const auto& i : block.GetCoordinate()) {
 		if (i.second >= field[0].size()) {
 			block = preBlock;
+			Commit();
+			NewBlock(RandTetramino());
 		}
 	}
 }
@@ -43,6 +50,11 @@ void Field::BlockMoveRight()
 			block = preBlock;
 		}
 	}
+}
+
+void Field::Commit()
+{
+	field = GetField();
 }
 
 const GameField Field::GetField()

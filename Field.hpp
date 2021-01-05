@@ -8,14 +8,14 @@ class Field
 public:
 	Field(const Block& block);
 	~Field() = default;
-	//void NewBlock(const Block& block);
+	void NewBlock(const Block& block);
 
 	void BlockMoveDown();
 	void BlockMoveLeft();
 	void BlockMoveRight();
 	//void BlockRotate();
 
-	//void Commit();
+	void Commit();
 	const GameField GetField();
 
 private:
