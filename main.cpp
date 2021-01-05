@@ -1,5 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "Tetris_Block.hpp"
+#include "Field.hpp"
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
 
 
 	Block block(RandTetramino());
-
+	Field field(block);
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -36,16 +37,19 @@ int main()
 					block.Rotate();
 				}
 				else if (event.key.code == sf::Keyboard::Down) {
-					block.MoveDown();
+					field.BlockMoveDown();
 				}
 			}
 		}
 		window.clear(sf::Color::White);
 				
-		for (const auto coord : block.GetCoordinate())
-		{
-			spriteTetramino.setPosition(coord.first * 20.f, coord.second * 20.f);
-			window.draw(spriteTetramino);
+		for (size_t i = 0; i < field.GetField().size(); ++i) {
+			for (size_t j = 0; j < field.GetField()[i].size(); ++j) {
+				if (field.GetField()[i][j]) {
+					spriteTetramino.setPosition(i * 20.f, j * 20.f);
+					window.draw(spriteTetramino);
+				}
+			}
 		}
 
 		window.display();
