@@ -21,6 +21,30 @@ void Field::BlockMoveDown()
 	}
 }
 
+void Field::BlockMoveLeft()
+{
+	Block preBlock = block;
+	block.MoveLeft();
+
+	for (const auto& i : block.GetCoordinate()) {
+		if (i.first < 0) {
+			block = preBlock;
+		}
+	}
+}
+
+void Field::BlockMoveRight()
+{
+	Block preBlock = block;
+	block.MoveRight();
+
+	for (const auto& i : block.GetCoordinate()) {
+		if (i.first >= field.size()) {
+			block = preBlock;
+		}
+	}
+}
+
 const GameField Field::GetField()
 {
 	GameField finalField = field;

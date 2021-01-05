@@ -28,10 +28,10 @@ int main()
 			}
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Left) {
-					block.MoveLeft();
+					field.BlockMoveLeft();
 				}
 				else if (event.key.code == sf::Keyboard::Right) {
-					block.MoveRight();
+					field.BlockMoveRight();
 				}
 				else if (event.key.code == sf::Keyboard::Up) {
 					block.Rotate();

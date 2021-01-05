@@ -11,8 +11,8 @@ public:
 	//void NewBlock(const Block& block);
 
 	void BlockMoveDown();
-	//void BlockMoveLeft();
-	//void BlockMoveRight();
+	void BlockMoveLeft();
+	void BlockMoveRight();
 	//void BlockRotate();
 
 	//void Commit();
