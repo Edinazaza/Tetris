@@ -5,6 +5,9 @@
 
 Field::Field(const Block& block) : block(block)
 {
+	for (size_t i = 0; i < 4; ++i) {
+		this->block.MoveRight();
+	}
 	for (auto& i : field) {
 		for (auto& j : i) {
 			j = false;
@@ -15,6 +18,9 @@ Field::Field(const Block& block) : block(block)
 void Field::NewBlock(const Block& block)
 {
 	this->block = block;
+	for (size_t i = 0; i < 4; ++i) {
+		this->block.MoveRight();
+	}
 	if (CheckerBlock(this->block)) {
 		GameOver = true;
 	}

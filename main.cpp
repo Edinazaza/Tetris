@@ -6,14 +6,17 @@ int main()
 {
 	srand(static_cast<unsigned int>(time(0)));
 
-	sf::ContextSettings setings;
-	setings.antialiasingLevel = 8; // сглаживание
-	sf::RenderWindow window(sf::VideoMode(600, 600), "Tetris", sf::Style::Default, setings);
+	//sf::ContextSettings setings;
+	//setings.antialiasingLevel = 8; // сглаживание
+
+	sf::RenderWindow window(sf::VideoMode(550, 500), "Tetris", sf::Style::Default);
 	//--------------------------------------------------------------------------------------
 
-	sf::Texture textureTetramino;
+	// тектстуры и спрайты
+	sf::Texture textureTetramino, backgroundField;
 	textureTetramino.loadFromFile("Texture_block.png");
-	sf::Sprite spriteTetramino(textureTetramino);
+	backgroundField.loadFromFile("Field.png");
+	sf::Sprite spriteTetramino(textureTetramino), spriteBackground(backgroundField);
 	//--------------------------------------------------------------------------------------
 
 
@@ -45,22 +48,25 @@ int main()
 					field.BlockRotate();
 				}
 				else if (event.key.code == sf::Keyboard::Down) {
-					delay = 0.05;
+					delay = 0.05; // "ускорение" 
 				}
 			}
 		}
 		window.clear(sf::Color::White);
+		window.draw(spriteBackground);
 		
+		// движения блока вниз со временем
 		if (timer > delay)
 		{
 			field.BlockMoveDown();
 			timer = 0;
 		}
 
+		// отрисовка спрайтов по координатам
 		for (size_t i = 0; i < field.GetField().size(); ++i) {
-			for (size_t j = 0; j < field.GetField()[i].size(); ++j) {
+			for (size_t j = 0; j < field.GetField()[0].size(); ++j) {
 				if (field.GetField()[i][j]) {
-					spriteTetramino.setPosition(i * 20.f, j * 20.f);
+					spriteTetramino.setPosition((i+2) * 20.f, j * 20.f);
 					window.draw(spriteTetramino);
 				}
 			}
