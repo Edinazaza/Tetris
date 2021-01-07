@@ -15,12 +15,17 @@ public:
 	void BlockMoveRight();
 	void BlockRotate();
 
-	const GameField GetField();
+	const GameField GetField() const;
+	const bool isGameOver() const;
+
 
 private:
 	Block block;
 	GameField field;
 
+	bool GameOver = false;
+
 	void Commit();
+	void DellRow();
 	bool CheckerBlock(const Block& block) const;
 };

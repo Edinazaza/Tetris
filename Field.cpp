@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "Field.hpp"
 
 
@@ -14,6 +15,9 @@ Field::Field(const Block& block) : block(block)
 void Field::NewBlock(const Block& block)
 {
 	this->block = block;
+	if (CheckerBlock(this->block)) {
+		GameOver = true;
+	}
 }
 
 void Field::BlockMoveDown()
@@ -66,9 +70,27 @@ void Field::BlockRotate()
 void Field::Commit()
 {
 	field = GetField();
+	DellRow();
 }
 
-const GameField Field::GetField()
+void Field::DellRow()
+{
+	size_t moveRow = field[0].size() - 1;
+	for (int i = field[0].size() - 1; i > 0; --i) {
+		unsigned short int countBar = 0;
+		for (size_t j = 0; j < field.size(); ++j) {
+			if (field[j][i]) {
+				++countBar;
+			}
+			field[j][moveRow] = field[j][i];
+		}
+		if (countBar < field.size()) {
+			--moveRow;
+		}
+	}
+}
+
+const GameField Field::GetField() const
 {
 	GameField finalField = field;
 	for (const auto& coord : block.GetCoordinate()) {
@@ -76,6 +98,11 @@ const GameField Field::GetField()
 	}
 
 	return finalField;
+}
+
+const bool Field::isGameOver() const
+{
+	return GameOver;
 }
 
 bool Field::CheckerBlock(const Block& block) const
