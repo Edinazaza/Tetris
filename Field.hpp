@@ -17,11 +17,12 @@ public:
 
 	const GameField GetField() const;
 	const bool isGameOver() const;
-
+	const long unsigned int GetScore() const;
 
 private:
 	Block block;
 	GameField field;
+	long unsigned int score = 0;
 
 	bool GameOver = false;
 

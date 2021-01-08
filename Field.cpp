@@ -82,6 +82,8 @@ void Field::Commit()
 void Field::DellRow()
 {
 	size_t moveRow = field[0].size() - 1;
+	unsigned long int addScore = 0;
+	short unsigned int multiple = 0;
 	for (int i = field[0].size() - 1; i > 0; --i) {
 		unsigned short int countBar = 0;
 		for (size_t j = 0; j < field.size(); ++j) {
@@ -93,7 +95,12 @@ void Field::DellRow()
 		if (countBar < field.size()) {
 			--moveRow;
 		}
+		else {
+			addScore += countBar * 10;
+			++multiple;
+		}
 	}
+	score += addScore * multiple;
 }
 
 const GameField Field::GetField() const
@@ -109,6 +116,11 @@ const GameField Field::GetField() const
 const bool Field::isGameOver() const
 {
 	return GameOver;
+}
+
+const long unsigned int Field::GetScore() const
+{
+	return score;
 }
 
 bool Field::CheckerBlock(const Block& block) const

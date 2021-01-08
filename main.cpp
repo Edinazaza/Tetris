@@ -1,6 +1,8 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "Tetris_Block.hpp"
 #include "Field.hpp"
+#include <iostream>
+#include <string>
 
 int main()
 {
@@ -19,9 +21,18 @@ int main()
 	sf::Sprite spriteTetramino(textureTetramino), spriteBackground(backgroundField);
 	//--------------------------------------------------------------------------------------
 
-
 	Block block(RandTetramino());
 	Field field(block);
+
+	sf::Font font;
+	font.loadFromFile("fonts_for_score.ttf");
+
+	sf::Text scoreText;
+	scoreText.setFont(font);
+	scoreText.setCharacterSize(24);
+	scoreText.setStyle(sf::Text::Bold);
+	scoreText.setFillColor(sf::Color::Black);
+	scoreText.setPosition(435.f, 217.f);
 
 	double timer = 0.0, delay = 0.35;
 	sf::Clock clock;
@@ -31,6 +42,7 @@ int main()
 		double time = clock.getElapsedTime().asSeconds();
 		clock.restart();
 		timer += time;
+		scoreText.setString(std::to_string(field.GetScore()));
 
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -54,12 +66,21 @@ int main()
 		}
 		window.clear(sf::Color::White);
 		window.draw(spriteBackground);
-		
+		window.draw(scoreText);
+
 		// движения блока вниз со временем
 		if (timer > delay)
 		{
 			field.BlockMoveDown();
 			timer = 0;
+		}
+
+		// проиграл
+		if (field.isGameOver()) {
+			// TODO
+			window.clear(sf::Color::White);
+			std::cout << "Game Over!" << std::endl;
+			break;
 		}
 
 		// отрисовка спрайтов по координатам
@@ -71,6 +92,7 @@ int main()
 				}
 			}
 		}
+
 
 		window.display();
 	}
