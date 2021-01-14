@@ -148,11 +148,13 @@
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tetris_Block.cpp" />
+    <ClCompile Include="WindowGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Field.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Tetris_Block.hpp" />
+    <ClInclude Include="WindowGame.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gameTutor.rc" />
