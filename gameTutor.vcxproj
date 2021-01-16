@@ -157,7 +157,14 @@
     <ClInclude Include="WindowGame.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="gameTutor.rc" />
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\Field.png" />
+    <Image Include="images\Texture_block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="images\fonts_for_score.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
