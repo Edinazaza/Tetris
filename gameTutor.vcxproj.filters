@@ -57,5 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="images\fonts_for_score.ttf" />
+    <Font Include="fonts\fonts_for_score.ttf" />
   </ItemGroup>
 </Project>

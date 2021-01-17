@@ -164,6 +164,7 @@
     <Image Include="images\Texture_block.png" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="fonts\fonts_for_score.ttf" />
     <Font Include="images\fonts_for_score.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
